@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Hello from index</h1>
+    <h4>Countries Dropdown</h4>
+    <select id="countries">
+      <option value=>select</option>
+      <option value= >australia</option>
+      <option value= >india</option>
+      <option value= >pakistan</option>
+      <option value= >america</option>
+    </select>
+  </body>
+  <script>
+    fetch("/countries")
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (json) {
+        console.log(json);
+        let countries = document.getElementById("countries");
+        json.forEach(function (country) {
+          let option = document.createElement("option");
+          option.value = country.id;
+          option.innerText = country.name;
+          countries.appendChild(option);
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  </script>
+</html>
